@@ -5,12 +5,12 @@ class Sender {
         this.permanent = {};
         this.temporary = {};
 
-        console.log("Sender construction.");
+        //console.log("Sender construction.");
         this.openSocket();
     }
 
     openSocket() {
-        console.log("OpenSocket.");
+        //console.log("OpenSocket.");
         
         this.socket = new WebSocket(this.url);
         this.socket.onclose = () => this.openSocket();
@@ -25,7 +25,7 @@ class Sender {
     }
 
     send(obj) {
-        console.log("Sending.");
+        //console.log("Sending.");
         
         if (this.socket.readyState !== this.socket.OPEN) return false;
 

@@ -20,7 +20,7 @@ window.resetPosition = () => {
     zeroframe = null;
 };
 
-let sender = new Sender("ws://beatrix.informatik.rwth-aachen.de:7777");  
+let sender = new Sender("wss://beatrix.informatik.rwth-aachen.de:7777");  
 //let sender = new Sender("ws://brundtland:50000");  
 //let sender = new Sender("ws://herzog.informatik.rwth-aachen.de:50000");
 sender.addPermanentProps({id: Math.floor((1 + Math.random()) * 0x10000)});
