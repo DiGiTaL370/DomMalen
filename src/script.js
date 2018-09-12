@@ -29,8 +29,6 @@ window.resetPosition = () => {
 //let sender = new Sender("ws://brundtland:50000");
 let sender = new Sender("wss://flux-dom.ddnss.de:50000");
 
-	
-
 //let sender = new Sender("ws://herzog.informatik.rwth-aachen.de:50000");
 //let sender = new Sender("ws://karamanlis:50000");
 
@@ -188,9 +186,9 @@ let current_color;
     };
 
     let reset = () => {
-        zoom = 0.25;
-        xshift = -250;
-        yshift = -250;
+        zoom = Math.min(window.innerHeight, window.innerWidth) / 2000;
+        xshift = 0.5 * zoom * (window.innerWidth - 2000);
+        yshift = 0.5 * zoom * (window.innerHeight - 2500);
         apply(xshift, yshift, zoom);
 
     };
@@ -316,6 +314,23 @@ let current_color;
         sender.on("open", () => modal.classList.remove("active"));
         sender.on("close", () => modal.classList.add("active"));
     }
+
+    const time_field = modal.querySelector(".time");
+    const check_early = () => {
+        let now = new Date();
+        let start = new Date();
+        start.setUTCHours(20);
+        start.setUTCMinutes(30);
+
+        let minutes = "" + start.getMinutes();
+        time_field.innerText = `${start.getHours()}:${minutes.padStart(2, "0")}`;
+
+
+        modal.classList.toggle("early", now < start);
+    };
+
+    window.setInterval(check_early , 1000);
+    check_early();
 })();
 
 (() => {

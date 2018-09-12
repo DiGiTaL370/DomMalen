@@ -21,7 +21,7 @@
 
     <div id="topbar">
         <div id="show_help">Hilfe</div>
-        <a href="https://www.rwth-aachen.de/cms/root/Footer/Services/~cesv/Datenschutzerklaerung/">Datenschutz</a>
+        <a class="superimportant" href="https://www.rwth-aachen.de/cms/root/Footer/Services/~cesv/Datenschutzerklaerung/">Datenschutz</a>
     </div>
 
     <div id="toolbox">
@@ -42,8 +42,14 @@
     </div>
 
     <div id="connecting_modal" class="modal active">
-        <p>Verbindung mit Server wird hergestellt...</p>
-        <p>Wenn das zu lange dauert, überprüfe deine Internetverbindung.</p>
+        <span class="early_warning">
+            <p>Es geht los um </p>
+            <p><span class="time">22:30</span></p>
+        </span>
+        <span class="regular">
+            <p>Verbindung mit Server wird hergestellt...</p>
+            <p>Wenn das zu lange dauert, überprüfe deine Internetverbindung.</p>
+        </span>
     </div>
 
     <div id="ban_modal" class="modal">
@@ -56,7 +62,7 @@
         <p>Noch ca. <span class="rest">0 Sekunden</span></p>
     </div>
 
-    <div id="help_overlay" class="modal active">
+    <div id="help_overlay" class="modal">
         <span></span>
 
         <div class="column">
@@ -66,13 +72,13 @@
 
             <span class="if_tablet">
                 <div class="helpbox center">
-                    Drücke und ziehe hier, um auf den Dom zu zeichnen.<br>
-                    Benutze zwei Finger zum Zoomen / Verschieben des Bildes.
+                    Ein Finger: Zeichnen<br>
+                    Zwei Finger: Verschieben / Zoomen
                 </div>
             </span>
             <span class="if_not_tablet">
                 <div class="helpbox center">
-                    Richte den Laserpointer auf den Dom und halte ihn gedrückt, um eine Linie zu zeichnen.
+                    Zum Zeichnen drücken
                 </div>
             </span>
         </div>
@@ -80,21 +86,28 @@
         <div class="toolhelp">
             <span class="if_tablet">
                 <div class="helpbox">
-                    Drücke hier, um zur Mitte des Bildes zurückzukehren.
+                    Zurück zur Bildmitte
                 </div>
             </span>
             <span class="if_not_tablet">
                 <div class="helpbox">
-                    Drücke hier, um den virtuellen Stift auf die Mitte des Bildes zurück zu setzen.
+                    Laser zurück zur Mitte des Doms
+                </div>
+            </span>
+
+            <span class="if_tablet">
+                <div class="helpbox">
+                    Zum Modus: "Laserpointer"
+                </div>
+            </span>
+            <span class="if_not_tablet">
+                <div class="helpbox">
+                    Zum Modus: "Zeichenbrett"
                 </div>
             </span>
 
             <div class="helpbox">
-                Drücke hier, um zwischen Laserpointer- und Zeichenbrettmodus zu wechseln.
-            </div>
-
-            <div class="helpbox">
-                Drücke hier, um eine andere Farbe zum Zeichnen zu wählen.
+                Farbe wählen
             </div>
         </div>
     </div>
