@@ -4,33 +4,102 @@
 <head>
     <link rel="stylesheet" type="text/css" href="style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 
 <body>
-    <div id="main">
-        <div id="colorbox">
-            <div class="row">
-            </div>
-            <div class="row">
-            </div>
-            <div class="row">
-            </div>
+    <input type="checkbox" id="cs_opened" class="hidden" />
+    <input type="checkbox" id="style_opened" class="hidden" />
+    <input type="checkbox" id="tablet_mode" class="hidden" />
+
+    <div id="tablet_screen">
+    </div>
+
+    <div id="laserpointer">
+        <div id="ray"></div>
+    </div>
+
+    <div id="topbar">
+        <div id="show_help">Hilfe</div>
+        <a href="https://www.rwth-aachen.de/cms/root/Footer/Services/~cesv/Datenschutzerklaerung/">Datenschutz</a>
+    </div>
+
+    <div id="toolbox">
+        <div class="button" id="reset">
         </div>
-        <div id="penbox">
-            <div class="row">
-                <button id="reset">Reset</button>
-                <button class="draw thick" data-type="thick"></button>
+
+        <label for="tablet_mode">
+            <div class="button" id="tabletmode">
             </div>
-            <div class="row">
-                <button class="draw normal" data-type="normal"></button>
-                <button class="draw thin" data-type="thin"></button>
+        </label>
+
+        <label for="cs_opened">
+            <div id="current" class="button">
+            </div>
+            <div id="cs_rest">
+            </div>
+        </label>
+    </div>
+
+    <div id="connecting_modal" class="modal active">
+        <p>Verbindung mit Server wird hergestellt...</p>
+        <p>Wenn das zu lange dauert, überprüfe deine Internetverbindung.</p>
+    </div>
+
+    <div id="ban_modal" class="modal">
+        <div class="backdrop"></div>
+        <p>Leider können nicht alle gleichzeitig malen.</p>
+        <p>Du bist gerade auf Platz <span class="queue">9001</span> in der Warteschlange.</p>
+        <div class="progress_outer">
+            <div class="progress_inner"></div>
+        </div>
+        <p>Noch ca. <span class="rest">0 Sekunden</span></p>
+    </div>
+
+    <div id="help_overlay" class="modal active">
+        <span></span>
+
+        <div class="column">
+            <div class="by-vci">
+                <img src="img/vci.jpg" />
+            </div>
+
+            <span class="if_tablet">
+                <div class="helpbox center">
+                    Drücke und ziehe hier, um auf den Dom zu zeichnen.<br>
+                    Benutze zwei Finger zum Zoomen / Verschieben des Bildes.
+                </div>
+            </span>
+            <span class="if_not_tablet">
+                <div class="helpbox center">
+                    Richte den Laserpointer auf den Dom und halte ihn gedrückt, um eine Linie zu zeichnen.
+                </div>
+            </span>
+        </div>
+
+        <div class="toolhelp">
+            <span class="if_tablet">
+                <div class="helpbox">
+                    Drücke hier, um zur Mitte des Bildes zurückzukehren.
+                </div>
+            </span>
+            <span class="if_not_tablet">
+                <div class="helpbox">
+                    Drücke hier, um den virtuellen Stift auf die Mitte des Bildes zurück zu setzen.
+                </div>
+            </span>
+
+            <div class="helpbox">
+                Drücke hier, um zwischen Laserpointer- und Zeichenbrettmodus zu wechseln.
+            </div>
+
+            <div class="helpbox">
+                Drücke hier, um eine andere Farbe zum Zeichnen zu wählen.
             </div>
         </div>
     </div>
 
-    <div class="coord" id="xcoord">XXXX</div>
-    <div class="coord" id="ycoord">YYYY</div>
-    <pre class="log" id="log"></pre>
+</div>
 
     <script type="text/javascript" src="bundled.js"></script>
 </body>

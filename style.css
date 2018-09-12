@@ -4,16 +4,217 @@
     border: 0px;
 }
 
-body, html { height: 100%;
-    white-space: nowrap;}
-
-#main{
-    position: absolute;
-    display: flex;
-    width: 100%;
-    height: 100%;
-    flex-direction: row;
+body, html {
+    height: 100vh;
+    font-family: helvetica, arial, sans-serif;
     overflow: hidden;
+    background-color: black;
+    color: white;
+}
+
+.context {
+    position: relative;
+    padding: 0.1px; /* hack to get stuff to line up */
+}
+
+#cs_rest {
+    text-align: center;
+    transition: all 0.5s;
+    opacity: 0;
+    max-height: 0vmax;
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    background-color: rgba(0,0,0,0.7);
+    overflow: hidden;
+    z-index: 1;
+    width: 100vw;
+}
+
+#cs_opened:checked ~ * #cs_rest {
+    opacity: 1;
+    max-height: 100vmax;
+}
+
+#current {
+    background-image: url("img/bucket.png");
+    background-size: 90%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+#styles .button {
+    display: inline-block;
+}
+
+#styles {
+    background-color: rgba(0,0,0,0.7);
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    opacity: 0;
+    width: 100vw;
+    display: none;
+    text-align: center;
+}
+
+#style_opened:checked ~ * #styles {
+    display: block;
+    opacity: 1;
+}
+
+.button {
+    position: relative;
+    width: 25vmin;
+    height: 25vmin;
+
+    border-radius: 10px;
+
+    background-size: contain;
+    background-color: beige;
+
+    margin: 1vmax;
+
+    box-shadow: 1vmin 1vmin 2vmin inset #fff8, -1vmin -1vmin 2vmin inset #0008;
+}
+
+.button:active {
+    transform: translate(0.1vmin, 0.1vmin);
+    box-shadow: 0.5vmin 0.5vmin 1vmin inset black, -0.5vmin -0.5vmin 1vmin inset white;
+}
+
+.big {
+    font-size: 10vmax;
+    line-height: 13vmax;
+    text-shadow: 1px 1px 12px black;
+}
+
+.colorbutton {
+    background-color: black;
+    display: inline-block;
+}
+
+.hidden {
+    display: none;
+}
+
+#help {
+    text-align: center;
+    border-radius: 300vh;
+    border: 1vmax solid blue;
+    color: blue;
+    background-color: white;
+    width: 10vmax;
+    height: 10vmax;
+}
+
+#help .big {
+    line-height: 9vmax;
+}
+
+#tablet_screen {
+    position: absolute;
+    background-color: black;
+
+    opacity: 0;
+    transition: opacity 0.5s;
+
+    width: 100vw;
+    height: 100vh;
+    left: 0px;
+    top: 0px;
+}
+
+#tablet_screen canvas {
+    transform-origin: 50vw 50vh;
+}
+
+#tablet_mode:checked ~ #tablet_screen {
+    opacity: 1;
+}
+
+.if_tablet {
+    display: none;
+}
+
+#tablet_mode:checked ~ .if_tablet,
+#tablet_mode:checked ~ * .if_tablet {
+    display: inline;
+}
+
+.if_not_tablet {
+    display: inline;
+}
+
+#tablet_mode:checked ~ * .if_not_tablet,
+#tablet_mode:checked ~ .if_not_tablet {
+    display: none;
+}
+
+#tablethelp {
+    position: fixed;
+    left: 2.5vw;
+    top: 50vh;
+}
+
+#laserpointer {
+    width: 100vw;
+    height: 100vh;
+
+    position: absolute;
+    left: 0px;
+    bottom: 25vmin;
+    background-color: black;
+    background-image: url("img/laser.jpg");
+    background-size: auto 50%;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    opacity: 1;
+    transition: opacity 0.5s, transform 0.5s;
+    transform: translate(0px, 0vh);
+    /* z-index: 0; */
+}
+
+#ray {
+    position: relative;
+    width: 2vh;
+    background-color: red;
+    height: 51vh;
+    left: calc(50% - 1vh);
+    z-index: -1;
+    border-radius: 0px 0px 2vh 2vh;
+
+    background-image: linear-gradient(to right, #fff0 0%, #fff8 50%, #fff0 100%);
+
+    opacity: 0;
+    transition: opacity 0.33s;
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(-3px, 0) rotate(0.5deg); }
+  33% {
+    transform: translate(3px, -2px) rotate(-0.5deg); }
+  66% {
+    transform: translate(-2px, -2px) rotate(0.5deg); }
+  100% {
+    transform: translate(2px, 0) rotate(-0.5deg); }
+ }
+
+#laserpointer.active {
+    animation: shake 0.03s linear infinite;
+    animation-direction: alternate;
+    transform-origin: bottom;
+}
+
+#laserpointer.active #ray {
+    opacity: 1;
+}
+
+#tablet_mode:checked ~ #laserpointer {
+    opacity: 0;
+    transform: translate(0px, -100vh);
 }
 
 html {
@@ -30,89 +231,184 @@ html {
     margin: 0;
 }
 
-#colorbox {
-    flex-grow: 1;
-    flex-basis: 0;
-    display: flex;
-    flex-direction: column;
-}
-
-.row {
-    flex-grow: 1;
-    flex-basis: 0;
-    display: flex;
-    flex-direction: row;
-}
-
-#colorbox .colorbutton {
-    flex-grow: 1;
-    margin: 2vmin;
-    box-shadow: 1px 1px 16px gray;
-    border-radius: 1em;
-    transition: all 0.5s;
-    opacity: 0.8;
-}
-
-#colorbox input { display: none; }
-#colorbox input:checked + .colorbutton {
-    transform: scale(1.1);
-    opacity: 1.0;
-    box-shadow: 0px 0px 5vmin inset white;
-}
-
-#penbox {
-    flex-grow: 1;
-    flex-basis: 0;
-    display: flex;
-    flex-direction: column;
-}
-
-#penbox button {
-    flex-grow: 1;
-    flex-basis: 0;
-
-    background-color: white;
-    border-radius: 1rem;
-    outline: none;
-
-    border-width: 2px;
-    margin: 2rem;
-    box-shadow: 0rem 0rem 2rem rgba(0,0,0,0.5);
-
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center center;
-}
-
-#penbox .thick {
+.thick {
     background-image: url("img/pencil_thick.png");
 }
-#penbox .thin {
+.thin {
     background-image: url("img/pencil_thin.png");
 }
-#penbox .normal {
+.normal {
     background-image: url("img/pencil_normal.png");
 }
-#penbox button.active {
-    box-shadow: 0em 0em 0.1em rgba(0,0,0,0.25);
-    transform: translate(1vmin, 1vmin);
-}
 
 
-#penbox #reset {
+#reset {
     background-color: rgb(204, 7, 30);
+    text-align: center;
+    background-image: url("img/reset.svg");
+    background-size: 90%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.modal {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    height: 0vh;
+    right: 0px;
+
+    background-color: #000a;
     color: white;
-    font-size: 10vmin;
-    text-shadow: 1px 1px 12px black;
 
+    opacity: 0;
+
+    font-size: 3vmax;
+    text-align: center;
+
+    transition: bottom 1s, opacity 1s;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    z-index: 9001;
 }
 
-#drawtouch span {
-    font-size: 2em;
+.modal.active {
+    height: 100vh;
+    opacity: 1;
 }
 
-@media (orientation: portrait) {
-    #main {
+
+#connecting_modal.active ~ #ban_modal.active {
+    height: 0vh;
+}
+
+#ban_modal .progress_outer {
+    background-color: gray;
+    width: 90%;
+    height: 5vh;
+    margin: 5vh auto;
+}
+
+#ban_modal .progress_inner {
+    width: 100%;
+    height: 100%;
+    background-color: green;
+    transition: width 1s linear;
+
+    background-image: linear-gradient(to top, #fff0 0%, #fff8 50%, #fff0 100%);
+}
+
+.modal p {
+    margin: 0.5em;
+}
+
+#toolbox {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#topbar {
+    position: absolute;
+    right: 2vmin;
+}
+
+#topbar label, #topbar a, #topbar a:visited, #topbar div {
+    color: white;
+    background-color: black;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: underline;
+    padding: 2px 5px;
+}
+
+#tabletmode {
+    background-image: url("img/modeswitch.png");
+    background-color: blue;
+}
+
+.helpbox {
+    color: white;
+    font-size: 3vmin;
+    border: 1px solid white;
+    background-color: #000a;
+    padding: 1vmin;
+    text-align: center;
+    box-sizing: border-box;
+
+    box-shadow: 0px 0px 3px white, 0px 0px 3px inset white;
+}
+
+.toolhelp {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.toolhelp .helpbox {
+    width: 27vmin;
+    height: auto;
+}
+
+.helpbox.center {
+    width: 50vw;
+    margin: 3vmin auto;
+}
+
+#help_overlay {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+
+    box-sizing: border-box;
+}
+
+.by-vci img {
+    max-width: 95vw;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+@media (orientation: landscape) {
+    #toolbox {
+        display: flex;
+
+        position: fixed;
+        left: 0px;
+        top: 0px;
+        bottom: 0px;
+        right: auto;
+
         flex-direction: column;
+    }
+
+    #help_overlay {
+        flex-direction: row-reverse;
+    }
+
+    .toolhelp {
+        flex-direction: column;
+    }
+
+    .toolhelp .helpbox {
+        height: 27vmin;
+    }
+
+    .by-vci img {
+        max-width: 60vw;
     }
 }
